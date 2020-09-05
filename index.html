@@ -13,19 +13,8 @@
     		<style>
     			body{margin:0}
     		</style>
-		<script>
-			(function() {
-				// var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameDiv');
-				// game.state.add("Boot",boot);
-				// game.state.add("Preload",preload);
-				// game.state.add("GameTitle",gameTitle);
-				// game.state.add("CharSelect",charSelect);
-				// game.state.add("GolfGame",golfGame);
-				// game.state.add("GameOver",gameOver);
-
-				// game.state.start("Boot");
-			})();    
-			var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameDiv');
+		<script> 
+			var game = new Phaser.Game(256, 240, Phaser.AUTO, 'gameDiv');
 				game.state.add("Boot",boot);
 				game.state.add("Preload",preload);
 				game.state.add("GameTitle",gameTitle);

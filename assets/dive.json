@@ -1,0 +1,44 @@
+{"frames": {
+
+"jump/1.png":
+{
+	"frame": {"x":1,"y":1,"w":17,"h":41},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":41},
+	"sourceSize": {"w":17,"h":41}
+},
+"kick/1.png":
+{
+	"frame": {"x":66,"y":1,"w":36,"h":29},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":29},
+	"sourceSize": {"w":36,"h":29}
+},
+"stand/1.png":
+{
+	"frame": {"x":20,"y":1,"w":21,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":21,"h":40},
+	"sourceSize": {"w":21,"h":40}
+},
+"stand/2.png":
+{
+	"frame": {"x":43,"y":1,"w":21,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":21,"h":40},
+	"sourceSize": {"w":21,"h":40}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "dive.png",
+	"format": "RGBA8888",
+	"size": {"w":103,"h":43},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:445761c9009e37ccc8da488a0be58975:6cfd782f41c726de508c973e016315be:5dbc868b24a964d0feb6228cbc4bd720$"
+}
+}

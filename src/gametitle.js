@@ -14,11 +14,11 @@ gameTitle.prototype = {
 		back.smoothed = false;
 
 		this.text = this.game.add.text(
-			this.game.world.centerX, 500, 
+			this.game.world.centerX, this.game.world.bottom-40, 
 			"  (z+x) \nTO BEGIN!", 
 			{ font: "20px monospace", fill: "#eeeeee"});
 			this.text.anchor.set(0.5);
-			this.text.setShadow(1, 1, 'rgba(0,0,0,0.2)', 1);
+			this.text.setShadow(1, 1, 'rgba(1,0,0,0.2)', 1);
 		
 		//this.game.audio.titleMusic.play();
 	},

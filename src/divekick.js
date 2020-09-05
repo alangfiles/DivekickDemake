@@ -1,69 +1,92 @@
 var diveKick = function(game){
 	var diveKey;
 	var kickKey;
-	var back;
 	var diveTimer = 0;
 	var kickTimer = 0;	
-	var character;
+	var playerone;
 }
 diveKick.prototype = {
 	preload: function(){
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.physics.arcade.gravity.y = 200;
+		//game.physics.arcade.gravity.y = 200;
 
 		diveKey = this.game.input.keyboard.addKey(Phaser.Keyboard.Z);
 		kickKey = this.game.input.keyboard.addKey(Phaser.Keyboard.X);
-		back = game.add.image(0, 20, 'background');
-		back.scale.set(2.5);
-		back.smoothed = false;
-		
+		this.bg = this.game.add.tileSprite(0, 0, 600, 240, 'background');
+		this.game.world.setBounds(0, 0, 600, 240);
+		this.game.scale.setGameSize(256,240);
 
-		character = game.add.sprite(200, 360, 'diveStand');
-		character.scale.set(4);
-		character.anchor.setTo(0.5, 0.5);
-		character.smoothed = false;
-		character.animations.add('jump', [0, 1, 2, 3], 10, true);
-		character.animations.add('kick', [0, 1, 2, 3], 10, true);
+		// background
+		playerone = this.game.add.sprite(this.game.world.centerX-60, this.bg.bottom, 'dive', 'stand/1.png');
+		playerone.smoothed = false;
+		playerone.scale.setTo(2,2);
+
+		playertwo = this.game.add.sprite(this.game.world.centerX, this.bg.bottom, 'kickStand');
+		playertwo.smoothed = false;
+		playertwo.scale.setTo(2,2);
 
 
-		game.physics.enable(character, Phaser.Physics.ARCADE);
-		character.body.collideWorldBounds = true;
-		character.body.bounce.y = 0.1;
-		character.body.gravity.y = 100;
 
+		// animations
+		playerone.animations.add('stand',Phaser.Animation.generateFrameNames('stand/', 1, 2, '.png'), 2, true, false);
+		playerone.animations.add('jump', Phaser.Animation.generateFrameNames('jump/', 1, 1, '.png'), 1, true, false);
+		playerone.animations.add('kick', Phaser.Animation.generateFrameNames('kick/', 1, 1, '.png'), 1, true, false);
+
+
+
+		playerone.animations.play('stand');
+
+		this.game.physics.enable(playerone, Phaser.Physics.ARCADE);
+		playerone.body.collideWorldBounds = true;
+		playerone.body.bounce.y = 0.2;
+		playerone.body.gravity.y = 400;
+
+		this.game.physics.enable(playertwo, Phaser.Physics.ARCADE);
+		playertwo.body.collideWorldBounds = true;
+		playertwo.body.bounce.y = 0.2;
+		playertwo.body.gravity.y = 400;
+
+
+
+
+		this.game.camera.x = playerone.body.x;
+		this.game.camera.follow(playerone);
+		//this.game.camera.focusOnXY((playerone.body.x + playertwo.body.x)/2);
 	},
 	create: function(){
 		diveKey.onDown.add(this.dive, this);
 		kickKey.onDown.add(this.kick, this);
 	},
 	update: function(){
-		if(character.body.velocity.x > 0)
-		{
-			character.body.velocity.x -=1;
+		if(playerone.body.bottom == this.bg.bottom){
+			//player is on the ground, stop them.
+			
+			playerone.animations.play("stand");
+			playerone.body.velocity.y = 0;
+			playerone.body.velocity.x = 0;
 		}
+		
+
 	},
 	dive: function(){
 		//jump in the air
-		console.log('fn:dive');
-		//character.animations.play("jump");
-		character.body.velocity.y = -300;
+		if(playerone.body.velocity.x >= 0){
+			playerone.animations.play("jump");
+			playerone.body.velocity.y += -300;
+		}
 	},
 	kick: function(){
-		console.log('fn:kick');
-		//character.animations.play("kick");
-		console.log(character.body.y);
-		if(character.body.y == 0){ //if on the ground, kickback
-			character.body.velocity.y = -200;
-			character.body.velocity.x = -100;
+		playerone.animations.play("kick");
+		if(playerone.body.bottom == this.bg.bottom){ //if on the ground, kickback
+			playerone.body.velocity.y += -230;
+			playerone.body.velocity.x += -120;
 		}
 		else {
-			if(character.body.y > 0){
-				character.body.velocity.x = 100;
-				//kickVelocity
-			}
-			
+			if(playerone.body.bottom < this.bg.bottom && playerone.body.velocity.x >= 0){
+				playerone.body.velocity.y = 0;
+				playerone.body.velocity.x += 100;
+			}		
 		}
-		
 	}
 }
